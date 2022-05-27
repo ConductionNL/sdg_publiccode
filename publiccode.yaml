@@ -1,0 +1,40 @@
+publiccodeYmlVersion: "0.1"
+
+name: "sdg-invoervoorziening-api"
+url: "https://github.com/VNG-Realisatie/gemma-zaken"
+releaseDate: "2022-04-05"
+
+softwareType: configurationFiles
+
+inputTypes:
+  - application/json
+  - application/xml
+
+outputTypes:
+  - application/json
+
+platforms:
+  - web
+  
+categories:
+  - collaboration
+  - it-development
+  
+developmentStatus: beta
+
+description:
+  nl:
+    shortDescription: "Een API voor data rondom producten voor gemeenten."
+    documentation: 'https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/maykinmedia/sdg-invoervoorziening/master/src/openapi.yaml&nocors'
+    apiDocumentation: 'https://raw.githubusercontent.com/maykinmedia/sdg-invoervoorziening/master/src/openapi.yaml'
+    # testDataLocation: 'https://raw.githubusercontent.com/ConductionNL/contactmomenten_publiccode/main/data/contactmomenten.json'
+  en:
+    shortDescription: "An API for data around products for municipalities."
+    documentation: 'https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/maykinmedia/sdg-invoervoorziening/master/src/openapi.yaml&nocors'
+    apiDocumentation: 'https://raw.githubusercontent.com/maykinmedia/sdg-invoervoorziening/master/src/openapi.yaml'
+    # testDataLocation: 'https://raw.githubusercontent.com/ConductionNL/contactmomenten_publiccode/main/data/contactmomenten.json'
+
+dependsOn:
+  open:
+    - name: common-gateway
+      versionMin: 1.0.0
