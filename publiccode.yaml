@@ -27,12 +27,12 @@ description:
     shortDescription: "Een API voor data rondom producten voor gemeenten."
     documentation: 'https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml&nocors'
     apiDocumentation: 'https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml'
-    # testDataLocation: 'https://raw.githubusercontent.com/ConductionNL/contactmomenten_publiccode/main/data/contactmomenten.json'
+    testDataLocation: 'https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/data/pdc.json'
   en:
     shortDescription: "An API for data around products for municipalities."
     documentation: 'https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml&nocors'
     apiDocumentation: 'https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml'
-    # testDataLocation: 'https://raw.githubusercontent.com/ConductionNL/contactmomenten_publiccode/main/data/contactmomenten.json'
+    testDataLocation: 'https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/data/pdc.json'
 
 dependsOn:
   open:
