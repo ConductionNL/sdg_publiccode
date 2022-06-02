@@ -1,0 +1,970 @@
+openapi: 3.0.3
+x-stoplight:
+  id: f7z2ggr279vfl
+info:
+  title: PDC aan de hand van SDG
+  version: 1.2.0
+paths:
+  /pdc/catalogi:
+    get:
+      operationId: catalogiList
+      description: Lijst van alle catalogi die worden gebruikt door organisaties.
+      parameters:
+        - in: query
+          name: organisatie
+          schema:
+            type: string
+            format: uuid
+          description: Toont catalogi die bij de opgegeven organisatie UUID horen.
+        - in: query
+          name: organisatieOwmsIdentifier
+          schema:
+            type: string
+          description: Toont catalogi die bij de opgegeven organisatie OWMS identifier horen.
+        - in: query
+          name: organisatieOwmsPrefLabel
+          schema:
+            type: string
+          description: Toont catalogi die bij de opgegeven organisatie OWMS pref label horen.
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - catalogi
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProductenCatalogus'
+          description: ''
+    parameters: []
+  '/pdc/catalogi/{uuid}':
+    get:
+      operationId: catalogiRetrieve
+      description: Catalogus die wordt gebruikt door een organisatie.
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - catalogi
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductenCatalogus'
+          description: ''
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+  /pdc/locaties:
+    get:
+      operationId: locatiesList
+      description: Lijst van alle locaties waar de bijbehorende organisatie 1 of meer producten aanbiedt.
+      parameters:
+        - in: query
+          name: organisatie
+          schema:
+            type: string
+            format: uuid
+          description: Toont locaties die bij de opgegeven organisatie horen.
+        - in: query
+          name: organisatieOwmsIdentifier
+          schema:
+            type: string
+          description: Toont locaties die bij de opgegeven organisatie OWMS identifier horen.
+        - in: query
+          name: organisatieOwmsPrefLabel
+          schema:
+            type: string
+          description: Toont locaties die bij de opgegeven organisatie OWMS pref label horen.
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - locaties
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Locatie'
+          description: ''
+    post:
+      operationId: locatiesCreate
+      description: Maak een nieuwe locatie voor een organisatie.
+      tags:
+        - locaties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Locatie'
+        required: true
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Locatie'
+          description: ''
+    parameters: []
+  '/pdc/locaties/{uuid}':
+    get:
+      operationId: locatiesRetrieve
+      description: Locatie waar de bijbehorende organisatie 1 of meer producten aanbiedt.
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - locaties
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Locatie'
+          description: ''
+    put:
+      operationId: locatiesUpdate
+      description: Update de locatie van een organistatie.
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - locaties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Locatie'
+        required: true
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Locatie'
+          description: ''
+    patch:
+      operationId: locatiesPartialUpdate
+      description: 'Viewset for a location, retrieved by uuid'
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - locaties
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PatchedLocatie'
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Locatie'
+          description: ''
+    delete:
+      operationId: locatiesDestroy
+      description: Verweider de locatie van een organisatie
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - locaties
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '204':
+          description: No response body
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+  /pdc/organisaties:
+    get:
+      operationId: organisatiesList
+      description: Lijst van alle organisaties die catalogi met producten aanbieden.
+      parameters:
+        - in: query
+          name: owmsIdentifier
+          schema:
+            type: string
+            format: uri
+          description: De identificatie (URI) van de organisatie zoals deze gebruikt op standaarden.overheid.nl
+        - in: query
+          name: owmsPrefLabel
+          schema:
+            type: string
+          description: Het label van de organisatie zoals deze gebruikt op standaarden.overheid.nl
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - organisaties
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/LokaleOverheid'
+          description: ''
+    parameters: []
+  '/pdc/organisaties/{uuid}':
+    get:
+      operationId: organisatiesRetrieve
+      description: Organisatie die catalogi met producten aanbiedt.
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - organisaties
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LokaleOverheid'
+          description: ''
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+  /pdc/producten:
+    get:
+      operationId: productenList
+      description: Lijst van alle producten die voorkomen in alle catalogi.
+      parameters:
+        - in: query
+          name: catalogus
+          schema:
+            type: string
+            format: uuid
+          description: Toont producten die behoren tot de catalogus van de opgegeven uuid.
+        - in: query
+          name: doelgroep
+          schema:
+            type: string
+            enum:
+              - eu-bedrijf
+              - eu-burger
+          description: Toont producten die overeenkomen met de opgegeven doelgroepen.
+        - in: query
+          name: organisatie
+          schema:
+            type: string
+            format: uuid
+          description: Toont producten die bij de opgegeven organisatie horen.
+        - in: query
+          name: organisatieOwmsIdentifier
+          schema:
+            type: string
+          description: Toont producten die bij de opgegeven organisatie OWMS identifier horen.
+        - in: query
+          name: organisatieOwmsPrefLabel
+          schema:
+            type: string
+          description: Toont producten die bij de opgegeven organisatie OWMS pref label horen.
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - in: query
+          name: productAanwezig
+          schema:
+            type: string
+            enum:
+              - ja
+              - nee
+              - onbekend
+          description: Toont producten die aanwezig zijn in de opgegeven catalogus.
+        - in: query
+          name: publicatieDatum
+          schema:
+            type: string
+            format: date
+          description: Toont producten met een publicatiedatum groter dan of gelijk aan de opgegeven datum.
+        - in: query
+          name: publicatieDatum__gte
+          schema:
+            type: string
+            format: date
+          description: Toont producten met een publicatiedatum groter dan of gelijk aan de opgegeven datum.
+        - in: query
+          name: taal
+          schema:
+            type: string
+            enum:
+              - en
+              - nl
+          description: Toont producten die overeenkomen met de opgegeven taal.
+        - in: query
+          name: upnLabel
+          schema:
+            type: string
+          description: Toont producten met een UPN label
+        - in: query
+          name: upnUri
+          schema:
+            type: string
+          description: Toont producten met een UPN URI
+      tags:
+        - producten
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+          description: ''
+    parameters: []
+  '/pdc/producten/{uuid}':
+    get:
+      operationId: productenRetrieve
+      description: Product dat voorkomt in een catalogus.
+      parameters:
+        - in: path
+          name: uuid
+          schema:
+            type: string
+            format: uuid
+            description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          required: true
+      tags:
+        - producten
+      security:
+        - tokenAuth: []
+        - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+          description: ''
+    parameters:
+      - schema:
+          type: string
+        name: uuid
+        in: path
+        required: true
+components:
+  schemas:
+    BevoegdeOrganisatie:
+      type: object
+      properties:
+        naam:
+          type: string
+          description: De naam van de bevoegde organisatie. Deze mag alleen afwijken indien er geen bekende overheidsorganisatie is.
+        owmsIdentifier:
+          type: string
+          format: uri
+          description: OWMS identifier van de hoofdorganisatie van deze lokale overheid.
+        owmsPrefLabel:
+          type: string
+          description: OWMS label van de hoofdorganisatie van deze lokale overheid.
+        owmsEndDate:
+          type: string
+          format: date-time
+          description: 'De einddatum, zoals gevonden in het OWMS-model.'
+      required:
+        - naam
+    LabeledUrl:
+      type: object
+      description: Default serializer for labeled urls.
+      properties:
+        label:
+          type: string
+        url:
+          type: string
+          format: uri
+      required:
+        - label
+        - url
+    LocalizedProduct:
+      type: object
+      description: Serializer for the localized version of a product.
+      properties:
+        taal:
+          allOf:
+            - $ref: '#/components/schemas/TaalEnum'
+          description: 'De taal waarin de betreffende tekst is geschreven.ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)'
+        specifiekeTekst:
+          type: string
+          description: Decentrale omschrijving.
+        bewijs:
+          type: string
+          description: Bewijs (type/format).
+        bezwaarEnBeroep:
+          type: string
+          description: Bezwaar en beroep.
+        decentraleProcedureLink:
+          type: string
+          format: uri
+          description: Link naar de procedure voor burgers en / of bedrijven.
+          maxLength: 200
+        kostenEnBetaalmethoden:
+          type: string
+          description: Kosten en betaalmethoden.
+        procedureBeschrijving:
+          type: string
+          description: Procedurebeschrijving.
+        productTitelDecentraal:
+          type: string
+          description: 'De titel van het decentrale product, die immers kan afwijken van de landelijke titel.'
+          maxLength: 100
+        uitersteTermijn:
+          type: string
+          description: Deadlines.
+        vereisten:
+          type: string
+          description: Vereisten auth/id/sign.
+        verwijzingLinks:
+          type: array
+          items:
+            $ref: '#/components/schemas/LabeledUrl'
+        wtdBijGeenReactie:
+          type: string
+          description: Wat te doen bij geen reactie.
+        datumWijziging:
+          type: string
+          format: date-time
+          readOnly: true
+          description: 'Decentrale overheden geven een wijzigingsdatum mee voor hun informatie. Deze datum wordt op het portaal getoond. '
+        productAanwezigToelichting:
+          type: string
+          title: Aanwezig toelichting
+          description: Toelichting
+        productValtOnderToelichting:
+          type: string
+          description: Toelichting over het product valt onder.
+      required:
+        - datumWijziging
+        - taal
+        - verwijzingLinks
+    Locatie:
+      type: object
+      description: 'Serializer for location details, including contact details, address and opening times.'
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        naam:
+          type: string
+          description: De naam van de locatie.
+          maxLength: 40
+        straat:
+          type: string
+          description: De straatnaam van de locatie.
+          maxLength: 256
+        nummer:
+          type: string
+          description: Het huisnummer van de locatie.
+          maxLength: 12
+        postcode:
+          type: string
+          description: De postcode van de locatie.
+          maxLength: 6
+        plaats:
+          type: string
+          description: De plaatsnaam van de locatie.
+          maxLength: 256
+        land:
+          type: string
+          description: Het land van de locatie.
+          maxLength: 128
+        openingstijdenOpmerking:
+          type: string
+          description: Opmerking over de openingstijden.
+          maxLength: 255
+        organisatie:
+          $ref: '#/components/schemas/LokaleOverheidBase'
+        openingstijden:
+          $ref: '#/components/schemas/Openingstijden'
+      required:
+        - id
+        - url
+        - naam
+        - straat
+        - nummer
+        - postcode
+        - plaats
+        - land
+        - organisatie
+        - openingstijden
+    LokaleOverheid:
+      type: object
+      description: 'Serializer for municipality details, including organization details, catalogs and locations.'
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+        owmsIdentifier:
+          type: string
+          format: uri
+          description: OWMS identifier van de hoofdorganisatie van deze lokale overheid.
+        owmsPrefLabel:
+          type: string
+          description: OWMS label van de hoofdorganisatie van deze lokale overheid.
+        owmsEndDate:
+          type: string
+          format: date-time
+          description: OWMS einddatum van de hoofdorganisatie van deze lokale overheid.
+        locaties:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocatieBase'
+        catalogi:
+          type: array
+          items:
+            type: string
+            format: uri
+          description: Lijst van catalogi die deze organisatie gebruikt.
+        contactWebsite:
+          type: string
+          format: uri
+          description: Website van de gemeente.
+          maxLength: 200
+        contactEmailadres:
+          type: string
+          format: email
+          description: Het e-mailadres van de verantwoordelijke contactpersoon.
+          maxLength: 254
+        contactTelefoonnummer:
+          type: string
+          description: Het telefoonnummer van de gemeente.
+          maxLength: 20
+        bevoegdeOrganisaties:
+          type: array
+          items:
+            $ref: '#/components/schemas/BevoegdeOrganisatie'
+        ondersteuningsOrganisatie:
+          $ref: '#/components/schemas/Overheidsorganisatie'
+      required:
+        - bevoegdeOrganisaties
+        - catalogi
+        - locaties
+        - ondersteuningsOrganisatie
+        - owmsEndDate
+        - url
+        - uuid
+    LokaleOverheidBase:
+      type: object
+      description: |-
+        Serializer that exposes a small subset of the fields for an organization, used in references to an organization.
+        - Fields: `url`, `owmsIdentifier`, `owmsPrefLabel`
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        owmsIdentifier:
+          type: string
+          format: uri
+          description: OWMS identifier van de hoofdorganisatie van deze lokale overheid.
+        owmsPrefLabel:
+          type: string
+          description: OWMS label van de hoofdorganisatie van deze lokale overheid.
+        owmsEndDate:
+          type: string
+          format: date-time
+          readOnly: true
+          description: 'De einddatum, zoals gevonden in het OWMS-model.'
+      required:
+        - owmsEndDate
+        - url
+    Openingstijden:
+      type: object
+      description: Serializer for location based opening times.
+      properties:
+        maandag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        dinsdag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        woensdag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        donderdag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        vrijdag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        zaterdag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+        zondag:
+          type: array
+          items:
+            type: string
+            maxLength: 32
+    Overheidsorganisatie:
+      type: object
+      description: 'Serializer for Overheidsorganisatie, including identifier, label and end date.'
+      properties:
+        owmsIdentifier:
+          type: string
+          format: uri
+          title: OWMS identificatie
+          description: De metadatastandaard voor informatie van de nederlandse overheid op internet.
+          maxLength: 200
+        owmsPrefLabel:
+          type: string
+          title: OWMS label
+          description: De wettelijk erkende naam van de organisatie.
+          maxLength: 200
+        owmsEndDate:
+          type: string
+          format: date-time
+          nullable: true
+          title: Einddatum
+          description: 'De einddatum, zoals gevonden in het OWMS-model.'
+      required:
+        - owmsIdentifier
+        - owmsPrefLabel
+    PaginatedLocatieList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=4'
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Locatie'
+    PaginatedLokaleOverheidList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=4'
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LokaleOverheid'
+    PaginatedProductList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=4'
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: 'http://api.example.org/accounts/?page=2'
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+    PatchedLocatie:
+      type: object
+      description: 'Serializer for location details, including contact details, address and opening times.'
+      properties:
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        uuid:
+          type: string
+          format: uuid
+          readOnly: true
+          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+        naam:
+          type: string
+          description: De naam van de locatie.
+          maxLength: 40
+        straat:
+          type: string
+          description: De straatnaam van de locatie.
+          maxLength: 256
+        nummer:
+          type: string
+          description: Het huisnummer van de locatie.
+          maxLength: 12
+        postcode:
+          type: string
+          description: De postcode van de locatie.
+          maxLength: 6
+        plaats:
+          type: string
+          description: De plaatsnaam van de locatie.
+          maxLength: 256
+        land:
+          type: string
+          description: Het land van de locatie.
+          maxLength: 128
+        openingstijdenOpmerking:
+          type: string
+          description: Opmerking over de openingstijden.
+          maxLength: 255
+        organisatie:
+          $ref: '#/components/schemas/LokaleOverheidBase'
+        openingstijden:
+          $ref: '#/components/schemas/Openingstijden'
+    Product:
+      type: object
+      description: 'Serializer for a product, including UPN, availability, locations and latest version translations.'
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        upnLabel:
+          type: string
+        upnUri:
+          type: string
+          format: uri
+        versie:
+          type: integer
+          readOnly: true
+        publicatieDatum:
+          type: string
+          format: date
+          readOnly: true
+        productAanwezig:
+          type: boolean
+          title: Aanwezig
+          description: Voert u dit product?
+          nullable: true
+        verantwoordelijkeOrganisatie:
+          $ref: '#/components/schemas/LokaleOverheidBase'
+        bevoegdeOrganisatie:
+          $ref: '#/components/schemas/BevoegdeOrganisatie'
+        catalogus:
+          $ref: '#/components/schemas/ProductenCatalogus'
+        locaties:
+          type: array
+          items:
+            $ref: '#/components/schemas/Locatie'
+        doelgroep:
+          type: string
+          enum:
+            - burger
+            - bedrijf
+          readOnly: true
+        gerelateerdeProducten:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+        - id
+        - url
+        - upnLabel
+        - upnUri
+        - versie
+        - publicatieDatum
+        - verantwoordelijkeOrganisatie
+        - bevoegdeOrganisatie
+        - catalogus
+        - locaties
+        - doelgroep
+        - gerelateerdeProducten
+    ProductenCatalogus:
+      type: object
+      description: 'Serializer for ProductenCatalogus details, including organizations and products.'
+      title: Catalogus
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          readOnly: true
+        url:
+          type: string
+          format: uri
+          readOnly: true
+        domein:
+          type: string
+          description: Een afkorting die wordt gebruikt om het domein aan te duiden.
+          maxLength: 5
+        naam:
+          type: string
+          description: De naam van de producten catalogus.
+          maxLength: 120
+        organisatie:
+          $ref: '#/components/schemas/LokaleOverheidBase'
+        isReferentieCatalogus:
+          type: boolean
+          description: Geeft aan of dit een referentiecatalogus is.
+        referentieCatalogus:
+          type: string
+          format: uri
+          description: De catalogus van referentie.
+          nullable: true
+        toelichting:
+          type: string
+          description: Toelichting bij het catalogus.
+        versie:
+          type: integer
+          maximum: 2147483647
+          minimum: 0
+          description: Het versienummer van het producten catalogus.
+        producten:
+          type: array
+          items:
+            $ref: '#/components/schemas/Product'
+      required:
+        - id
+        - url
+        - domein
+        - naam
+        - organisatie
+        - producten
+    TaalEnum:
+      enum:
+        - nl
+        - en
+      type: string
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
