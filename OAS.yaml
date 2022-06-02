@@ -47,6 +47,16 @@ paths:
                   $ref: '#/components/schemas/ProductenCatalogus'
           description: ''
     parameters: []
+    post:
+      summary: ''
+      operationId: post-pdc-catalogi
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductenCatalogus'
   '/pdc/catalogi/{uuid}':
     get:
       operationId: catalogiRetrieve
@@ -77,6 +87,16 @@ paths:
         name: uuid
         in: path
         required: true
+    put:
+      summary: ''
+      operationId: put-pdc-catalogi-uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProductenCatalogus'
   /pdc/locaties:
     get:
       operationId: locatiesList
@@ -283,6 +303,16 @@ paths:
                   $ref: '#/components/schemas/LokaleOverheid'
           description: ''
     parameters: []
+    post:
+      summary: ''
+      operationId: post-pdc-organisaties
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LokaleOverheid'
   '/pdc/organisaties/{uuid}':
     get:
       operationId: organisatiesRetrieve
@@ -313,6 +343,16 @@ paths:
         name: uuid
         in: path
         required: true
+    put:
+      summary: ''
+      operationId: put-pdc-organisaties-uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LokaleOverheid'
   /pdc/producten:
     get:
       operationId: productenList
@@ -408,6 +448,16 @@ paths:
                   $ref: '#/components/schemas/Product'
           description: ''
     parameters: []
+    post:
+      summary: ''
+      operationId: post-pdc-producten
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
   '/pdc/producten/{uuid}':
     get:
       operationId: productenRetrieve
@@ -438,6 +488,16 @@ paths:
         name: uuid
         in: path
         required: true
+    put:
+      summary: ''
+      operationId: put-pdc-producten-uuid
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
 components:
   schemas:
     BevoegdeOrganisatie:
