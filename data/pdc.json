@@ -1,0 +1,54 @@
+{
+  "openapi": "3.0.0",
+  "collection": "https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml",
+  "schemas": {
+    "Product":[
+      {
+        "properties": {
+          "url": "http://example.com",
+          "upnLabel": "string",
+          "upnUri": "http://example.com",
+          "versie": 0,
+          "publicatieDatum": "2019-08-24",
+          "productAanwezig": true,
+          "verantwoordelijkeOrganisatie": {
+            "url": "http://example.com",
+            "owmsIdentifier": "http://example.com",
+            "owmsPrefLabel": "string",
+            "owmsEndDate": "2019-08-24T14:15:22Z"
+          },
+          "bevoegdeOrganisatie": {
+            "naam": "Conduction",
+            "owmsIdentifier": "http://example.com",
+            "owmsPrefLabel": "string",
+            "owmsEndDate": "2019-08-24T14:15:22Z"
+          },
+          "catalogus": {
+            "url": "http://example.com",
+            "domein": "strin",
+            "naam": "Verzameling producten",
+            "organisatie": {},
+            "isReferentieCatalogus": true,
+            "referentieCatalogus": "http://example.com",
+            "toelichting": "string",
+            "versie": 2147483647,
+            "producten": []
+          },
+          "locaties": [
+            {
+              "url": "http://example.com",
+              "naam": "Winkel",
+              "straat": "Teststraat",
+              "nummer": "21",
+              "postcode": "1234AB",
+              "plaats": "Teststad",
+              "land": "Nederland",
+              "openingstijdenOpmerking": "Niet open in weekend"
+            }
+          ],
+          "doelgroep": "burger"
+          }
+      }
+    ]
+  }
+}
