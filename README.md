@@ -8,7 +8,7 @@ Er zit ook een testdata set die kan worden meegeladen bij het gebruik van de API
 
 Als je meer wilt lezen over de Single Digital Gateway Invoervoorziening kan dat op de [pagina van de VNG](https://vng.nl/projecten/single-digital-gateway).
 
-Als je de documentatie van de API wilt bekijken kan dat op de [redoc pagina](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/maykinmedia/sdg-invoervoorziening/master/src/openapi.yaml&nocors).
+Als je de documentatie van de API wilt bekijken kan dat op de [redoc pagina](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/Klantinteractie-Servicesysteem/pdc-component/main/OAS.yaml&nocors).
 
 ### Local setup
 
