@@ -1,4 +1,6 @@
 openapi: 3.1.0
+x-stoplight:
+  id: f7z2ggr279vfl
 info:
   title: PDC aan de hand van SDG
   version: 1.2.0
@@ -597,8 +599,8 @@ components:
         uuid:
           type: string
           format: uuid
-          readOnly: true
           description: De identificatie die binnen deze API gebruikt wordt voor de resource.
+          readOnly: true
         owmsIdentifier:
           type: string
           format: uri
@@ -613,13 +615,13 @@ components:
         locaties:
           type: array
           items:
-            $ref: '#/components/schemas/LocatieBase'
+            $ref: '#/components/schemas/Locatie'
         catalogi:
           type: array
+          description: Lijst van catalogi die deze organisatie gebruikt.
           items:
             type: string
             format: uri
-          description: Lijst van catalogi die deze organisatie gebruikt.
         contactWebsite:
           type: string
           format: uri
@@ -641,13 +643,13 @@ components:
         ondersteuningsOrganisatie:
           $ref: '#/components/schemas/Overheidsorganisatie'
       required:
-        - bevoegdeOrganisaties
-        - catalogi
-        - locaties
-        - ondersteuningsOrganisatie
-        - owmsEndDate
         - url
         - uuid
+        - owmsEndDate
+        - locaties
+        - catalogi
+        - bevoegdeOrganisaties
+        - ondersteuningsOrganisatie
     LokaleOverheidBase:
       type: object
       description: |-
