@@ -1,6 +1,4 @@
 openapi: 3.1.0
-x-stoplight:
-  id: f7z2ggr279vfl
 info:
   title: PDC aan de hand van SDG
   version: 1.2.0
