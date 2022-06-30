@@ -1,6 +1,6 @@
 openapi: 3.1.0
 x-stoplight:
-  id: f7z2ggr279vfl
+  id: uczgrmzyhzpis
 info:
   title: PDC aan de hand van SDG
   version: 1.2.0
@@ -536,9 +536,11 @@ components:
       description: Serializer for the localized version of a product.
       properties:
         taal:
-          allOf:
-            - $ref: '#/components/schemas/TaalEnum'
+          type: string
           description: 'De taal waarin de betreffende tekst is geschreven.ISO 639-1 (https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes)'
+          enum:
+            - nl
+            - en
         specifiekeTekst:
           type: string
           description: Decentrale omschrijving.
@@ -579,8 +581,8 @@ components:
         datumWijziging:
           type: string
           format: date-time
-          readOnly: true
           description: 'Decentrale overheden geven een wijzigingsdatum mee voor hun informatie. Deze datum wordt op het portaal getoond. '
+          readOnly: true
         productAanwezigToelichting:
           type: string
           title: Aanwezig toelichting
@@ -589,18 +591,13 @@ components:
           type: string
           description: Toelichting over het product valt onder.
       required:
-        - datumWijziging
         - taal
         - verwijzingLinks
+        - datumWijziging
     Locatie:
       type: object
       description: 'Serializer for location details, including contact details, address and opening times.'
       properties:
-        id:
-          type: string
-          format: uuid
-          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
-          readOnly: true
         url:
           type: string
           format: uri
@@ -638,7 +635,6 @@ components:
         openingstijden:
           $ref: '#/components/schemas/Openingstijden'
       required:
-        - id
         - url
         - naam
         - straat
@@ -907,11 +903,6 @@ components:
       type: object
       description: 'Serializer for a product, including UPN, availability, locations and latest version translations.'
       properties:
-        id:
-          type: string
-          format: uuid
-          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
-          readOnly: true
         url:
           type: string
           format: uri
@@ -953,8 +944,11 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Product'
+        vertalingen:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocalizedProduct'
       required:
-        - id
         - url
         - upnLabel
         - upnUri
@@ -971,11 +965,6 @@ components:
       description: 'Serializer for ProductenCatalogus details, including organizations and products.'
       title: Catalogus
       properties:
-        id:
-          type: string
-          format: uuid
-          description: De identificatie die binnen deze API gebruikt wordt voor de resource.
-          readOnly: true
         url:
           type: string
           format: uri
@@ -1011,7 +1000,6 @@ components:
           items:
             $ref: '#/components/schemas/Product'
       required:
-        - id
         - url
         - domein
         - naam
