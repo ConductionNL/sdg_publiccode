@@ -37,15 +37,39 @@
           "locaties": [
             {
               "url": "http://example.com",
-              "naam": "Winkel",
-              "straat": "Teststraat",
+              "naam": "Stadhuis demodam",
+              "straat": "demodamstraat",
               "nummer": "21",
               "postcode": "1234AB",
               "plaats": "Teststad",
               "land": "Nederland",
-              "openingstijdenOpmerking": "Niet open in weekend"
+              "openingstijdenOpmerking": "Niet open in het weekend"
             }
           ],
+          "vertalingen": [
+            {
+                "taal": "nl",
+                "specifiekeTekst": "",
+                "bewijs": "string",
+                "bezwaarEnBeroep": "string",
+                "decentraleProcedureLink": "http://example.com",
+                "kostenEnBetaalmethoden": "string",
+                "procedureBeschrijving": "Aanvraag ID",
+                "productTitelDecentraal": "Aanvraag ID",
+                "uitersteTermijn": "string",
+                "vereisten": "string",
+                "verwijzingLinks": [
+                    {
+                        "label": "string",
+                        "url": "http://example.com"
+                    }
+                ],
+                "wtdBijGeenReactie": "string",
+                "datumWijziging": "2019-08-24T14:15:22",
+                "productAanwezigToelichting": "string",
+                "productValtOnderToelichting": "string"
+            }
+        ],
           "doelgroep": "burger"
           }
       }
