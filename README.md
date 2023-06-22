@@ -1,4 +1,11 @@
 # PDC Component
+---
+**NOTE**
+
+Dit project is niet verder doorontwikkeld, en is in juni 2023 gearchiveerd.
+
+---
+
 
 ## PDC Component aan de hand van de Single Digital Gateway Invoervoorziening
 
